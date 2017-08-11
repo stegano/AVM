@@ -1,16 +1,16 @@
 var View = require("../../lib/framework/View");
 var Utils = require("../../lib/utils");
-
 var model = require("./model");
 /**
  * 판매 상품을 보여주는 뷰 컴포넌트
+ * @namespace Display
  * */
 var Display = new View({
   componentElementId: "display",
   model: model,
   initialize: function () {
     var that = this;
-    this.itemTemplate = Utils.template(document.getElementById("DisplayItemTemplate").innerHTML);
+    this.itemTemplate = Utils.template(Utils.$("#DisplayItemTemplate").innerHTML);
     /**
      * 모델 이벤트 바인딩
      * */
@@ -25,6 +25,8 @@ var Display = new View({
     });
   },
   /**
+   * 아이템 정보를 생성
+   * @memberOf Display
    * @param {String[]} itemNames 아이템 이름
    * @param {Number} minPrice 최소 가격
    * @param {Number} maxPrice 최대 가격
@@ -49,9 +51,9 @@ var Display = new View({
     var _maxCount = Number(maxCount) || 3;
     var ret = [];
     for (var name, price, count, len = _itemNames.length, i = 0; i < len; i++) {
-      name = _itemNames.splice(this.genRandomValue(0, _itemNames.length - 1), 1)[0];
-      price = Math.round(this.genRandomValue(_minPrice, _maxPrice) / 100) * 100;
-      count = this.genRandomValue(_minCount, _maxCount);
+      name = _itemNames.splice(Utils.genRandomValue(0, _itemNames.length - 1), 1)[0];
+      price = Math.round(Utils.genRandomValue(_minPrice, _maxPrice) / 100) * 100;
+      count = Utils.genRandomValue(_minCount, _maxCount);
       ret.push({
         name: name,
         price: price,
@@ -61,16 +63,8 @@ var Display = new View({
     return ret;
   },
   /**
-   * 랜덤 숫자 생성
-   * @param {number} min 최소 값
-   * @param {number} max 최대 값
-   * @return {number} `min ~ max` 사이의 정수
-   * */
-  genRandomValue: function (min, max) {
-    return parseInt(Math.random() * (max - min + 1) + min, 10);
-  },
-  /**
    * 아이템을 그림
+   * @memberOf Display
    * @param {Object[]} items 아이템 정보
    * @return {Object} View
    * */

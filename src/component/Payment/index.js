@@ -1,9 +1,9 @@
 var View = require("../../lib/framework/View");
 var Utils = require("../../lib/utils");
-
 var model = require("./model");
 /**
  * 판매 상품을 보여주는 뷰 컴포넌트
+ * @namespace Payment
  * */
 var Payment = new View({
   componentElementId: "payment",
@@ -28,6 +28,9 @@ var Payment = new View({
   },
   /**
    * 현재 소유한 금액을 업데이트
+   * @memberOf Payment
+   * @param {Number} account
+   * @return {Object} Payment
    * */
   renderUpdateMyAccount: function (account) {
     Utils.$("#myAccount > .amount")[0].innerText = Utils.comma(account);
@@ -35,6 +38,8 @@ var Payment = new View({
   },
   /**
    * 현재 넣은 금액을 업데이트
+   * @memberOf Payment
+   * @return {Object} Payment
    * */
   renderUpdateDeposit: function (account) {
     Utils.$("#deposit > .amount")[0].innerText = Utils.comma(account);

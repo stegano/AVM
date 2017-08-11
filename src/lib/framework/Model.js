@@ -13,9 +13,9 @@ var Model = function (defaults) {
    * */
   this.set = function (newData, options) {
     var _options = options || {
-        silent: false,
-        trigger: false
-      };
+      silent: false,
+      trigger: false
+    };
     var changeEvents = null;
     var isNewState = false;
     /**
@@ -99,7 +99,7 @@ var Model = function (defaults) {
    * */
   this._getEvents = function () {
     return events;
-  }
+  };
 };
 
 /**
@@ -110,9 +110,9 @@ var Model = function (defaults) {
  * */
 this.set = function (newData, options) {
   var _options = options || {
-      silent: false,
-      trigger: false
-    };
+    silent: false,
+    trigger: false
+  };
   var changeEvents = null;
   var isNewState = false;
   /**

@@ -5,7 +5,7 @@ var Utils = {
    * @return {Function} replaceTemplateData
    * */
   template: function (htmlString) {
-    var _htmlTemplate = htmlString.replace(/^\s*|\s*/gm, '');
+    var _htmlTemplate = htmlString.replace(/^\s*|\s*/gm, "");
     /**
      * @param {Object} data 치환할 데이터
      * */
@@ -26,7 +26,7 @@ var Utils = {
     var ret = null;
     var fragments = querySelector.split(" ");
     if (fragments[fragments.length - 1][0] === "#") {
-      ret = document.querySelector(querySelector)
+      ret = document.querySelector(querySelector);
     } else {
       ret = document.querySelectorAll(querySelector);
     }
@@ -36,7 +36,16 @@ var Utils = {
    * 숫자에 콤마 추가
    * */
   comma: function (number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  },
+  /**
+   * 랜덤 숫자 생성
+   * @param {number} min 최소 값
+   * @param {number} max 최대 값
+   * @return {number} `min ~ max` 사이의 정수
+   * */
+  genRandomValue: function (min, max) {
+    return parseInt(Math.random() * (max - min + 1) + min, 10);
   }
 };
 
