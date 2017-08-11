@@ -4,7 +4,12 @@ var Model = require("../../lib/framework/Model");
  * @namespace PaymentModel
  * */
 var PaymentModel = new Model({
-  myAccount: 0,
-  deposit: 0
+  myAccount: 10000,
+  deposit: 0,
+  machineState: {
+    billCount: 0,
+    maxAmount: 3000
+  },
+  dataTransfer: {}
 });
 module.exports = PaymentModel;

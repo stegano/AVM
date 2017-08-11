@@ -5,7 +5,7 @@ var Utils = {
    * @return {Function} replaceTemplateData
    * */
   template: function (htmlString) {
-    var _htmlTemplate = htmlString.replace(/^\s*|\s*/gm, "");
+    var _htmlTemplate = htmlString.replace(/^\s*|\s*$/gm, "");
     /**
      * @param {Object} data 치환할 데이터
      * */
@@ -46,6 +46,17 @@ var Utils = {
    * */
   genRandomValue: function (min, max) {
     return parseInt(Math.random() * (max - min + 1) + min, 10);
+  },
+  /**
+   * DOM 이벤트 바인딩
+   * */
+  onEvent: function (element, eventName, callback) {
+    if ("addEventListener" in element) {
+      element.addEventListener(eventName, callback);
+    } else {
+      element.attachEvent("on" + eventName, callback);
+    }
+    return element;
   }
 };
 

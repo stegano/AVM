@@ -6,11 +6,17 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>[AVM] Automatic Vending Machine</title>
-  <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+  <style>
+    * {
+      -webkit-user-drag: none;
+    }
+  </style>
   <script id="DisplayItemTemplate" type="text/template">
-    <li data-count="{{=count}}" data-price="{{=price}}">
-      <div>{{=productName}}</div>
-      <div>{{=price}}</div>
+    <li>
+      <a data-count="{{=count}}" data-price="{{=price}}" data-name="{{=productName}}" href="#">
+        <div>{{=productName}}</div>
+        <div>{{=price}}</div>
+      </a>
     </li>
   </script>
   <script id="ConsoleLogItemTemplate" type="text/template">
@@ -31,7 +37,7 @@
       <p>
         <span>투입구</span>
       </p>
-      <div id="deposit">
+      <div id="deposit" style="width: 80px; height: 50px; background-color: blue;">
         <span class="amount">0</span>
         <span>원</span>
       </div>
@@ -41,10 +47,26 @@
     </div>
     <div id="wallet">
       <ul class="items">
-        <li data-unit="50">50원</li>
-        <li data-unit="100">100원</li>
-        <li data-unit="500">500원</li>
-        <li data-unit="1000">1,000원</li>
+        <li>
+          <a href="#" data-amount="50">
+            50원
+          </a>
+        </li>
+        <li>
+          <a href="#" data-amount="100">
+            100원
+          </a>
+        </li>
+        <li>
+          <a href="#" data-amount="500">
+            500원
+          </a>
+        </li>
+        <li>
+          <a href="#" data-amount="1000">
+            1,000원
+          </a>
+        </li>
       </ul>
       <p>
         <span>지금 내돈</span>

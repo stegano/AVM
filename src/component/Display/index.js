@@ -1,6 +1,9 @@
 var View = require("../../lib/framework/View");
 var Utils = require("../../lib/utils");
 var model = require("./model");
+var PaymentModel = require("../Payment/model");
+var ConsoleModel = require("../Console/model");
+
 /**
  * 판매 상품을 보여주는 뷰 컴포넌트
  * @namespace Display
@@ -23,6 +26,71 @@ var Display = new View({
     this.model.set({
       items: this.genItems(null, 100, 800, 1, 3)
     });
+    /**
+     * UI 이벤트 바인딩
+     * */
+    Utils.onEvent(Utils.$("#" + this.componentElementId), "click", function (e) {
+      var target = e.srcElement;
+      if (target.parentNode.nodeName.toUpperCase() === "A") {
+        that.clickItemAnchor(e, target.parentNode);
+      }
+    });
+  },
+  /**
+   * 콘솔 로그 생성
+   * @param {String} message
+   * @return {Object} Display
+   * */
+  log: function (message) {
+    ConsoleModel.set({
+      log: message
+    }, {
+      trigger: true
+    });
+    return this;
+  },
+  clickItemAnchor: function (e, target) {
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+    var name = target.getAttribute("data-name");
+    var price = Number(target.getAttribute("data-price")) || 0;
+    var count = Number(target.getAttribute("data-count")) || 0;
+    var deposit = PaymentModel.get("deposit");
+    this.log("[" + name + "](을)를 선택 하셨습니다.");
+    if (count === 0) {
+      this.log("죄송합니다. 이 제품은 품절 되었습니다!");
+    } else if (deposit < price) {
+      this.log("잔액이 부족합니다. 투입구에 돈을 넣어주세요!");
+    } else {
+      /**
+       * 결제 금액만큼 차감
+       */
+      PaymentModel.set({
+        deposit: deposit - price
+      });
+      /**
+       * 진열된 상품의 정보를 업데이트
+       * */
+      var items = this.model.get("items");
+      for (var it, i = 0, len = items.length; i < len; i++) {
+        it = items[i];
+        if (it.name === name) {
+          items[i].count--;
+          break;
+        }
+      }
+      /**
+       * 래퍼런스의 경우 변경사항을 체크하지 못함
+       * 강제 트리거
+       * */
+      this.model.set({
+        items: items
+      }, {
+        trigger: true
+      });
+      this.log("감사합니다. 결제가 완료 되었습니다.");
+      this.log("[" + name + "](이)가 나왔습니다.");
+    }
+    return this;
   },
   /**
    * 아이템 정보를 생성
@@ -66,7 +134,7 @@ var Display = new View({
    * 아이템을 그림
    * @memberOf Display
    * @param {Object[]} items 아이템 정보
-   * @return {Object} View
+   * @return {Object} Display
    * */
   render: function (items) {
     var $$root = Utils.$("#" + this.componentElementId + "> .items")[0];
