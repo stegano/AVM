@@ -38,7 +38,7 @@ var Payment = new View({
      * 마우스가 영역 밖으로 나가는 경우 드래그 이벤트를 종료
      * */
     Utils.onEvent(Utils.$("#" + this.componentElementId), "mouseleave", function (e) {
-      that.dragCancel(e);
+      // that.dragCancel(e);
     });
     /**
      * 마우스 다운로드시 드래그 시작
@@ -52,7 +52,7 @@ var Payment = new View({
     /**
      * 마우스 다운로드시 드래그 끝
      * */
-    Utils.onEvent(window, "mouseup", function (e) {
+    Utils.onEvent(document, "mouseup", function (e) {
       var target = e.srcElement;
       that.dragEnd(e, target);
     });
@@ -119,6 +119,7 @@ var Payment = new View({
     var targetId = target.getAttribute("id");
     var dataTransferData = this.model.get("dataTransfer");
     var amount = dataTransferData.amount;
+    console.log("amount: ", amount);
     if (amount) {
       if (targetId === "deposit") {
         this.insertAmount(amount);
