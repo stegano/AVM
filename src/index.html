@@ -7,26 +7,54 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>[AVM] Automatic Vending Machine</title>
   <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-  <script src="index.min.js"></script>
   <script id="DisplayItemTemplate" type="text/template">
-    <li>Item1</li>
+    <li data-count="{{=count}}" data-price="{{=price}}">
+      <div>{{=productName}}</div>
+      <div>{{=price}}</div>
+    </li>
   </script>
   <style>
   </style>
 </head>
 <body>
 <div id="app" style="border: solid 1px black;">
+  <!-- DISPLAY -->
   <div id="display" style="width: 800px; height: 400px">
-    <ul class="items">
-
-    </ul>
+    <ul class="items"></ul>
   </div>
-  <div id="payments"></div>
+  <!-- PAYMENT -->
+  <div id="payment">
+    <div id="slot">
+      <p>
+        <span>투입구</span>
+      </p>
+      <div id="deposit">
+        <span class="amount">0</span>
+        <span>원</span>
+      </div>
+      <button id="return">
+        <span>반환 버튼</span>
+      </button>
+    </div>
+    <div id="wallet">
+      <ul class="items">
+        <li data-unit="50">50원</li>
+        <li data-unit="100">100원</li>
+        <li data-unit="500">500원</li>
+        <li data-unit="1000">1,000원</li>
+      </ul>
+      <p>
+        <span>지금 내돈</span>
+        <span id="myAccount">
+          <span class="amount">0</span>
+          <span>원</span>
+        </span>
+      </p>
+    </div>
+  </div>
+  <!-- CONSOLE -->
   <div id="console"></div>
 </div>
-<script>
-</script>
-<script>
-</script>
+<script src="index.min.js"></script>
 </body>
 </html>

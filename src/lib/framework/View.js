@@ -7,9 +7,6 @@ var View = function (options, property) {
   if ("initialize" in _options && typeof _options.initialize === "function") {
     options.initialize(property);
   }
-  this.extends = function (options) {
-    return new View(options);
-  }
 };
 
 module.exports = View;

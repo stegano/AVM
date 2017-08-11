@@ -1,21 +1,27 @@
-var View = require("../lib/framework/View");
+var View = require("../../lib/framework/View");
+var Utils = require("../../lib/utils");
+
 var model = require("./model");
 /**
  * 판매 상품을 보여주는 뷰 컴포넌트
  * */
-var Display = View.extends({
-  rootElId: "#display",
+var Display = new View({
+  componentElementId: "display",
   model: model,
   initialize: function () {
+    var that = this;
+    this.itemTemplate = Utils.template(document.getElementById("DisplayItemTemplate").innerHTML);
+    /**
+     * 모델 이벤트 바인딩
+     * */
     this.model.on("change:items", function (items) {
-      console.log("set Items!!", items);
+      that.render(items);
     });
-
     /**
      * 기본 설정으로 아이템 생성
      * */
     this.model.set({
-      items: this.genItems()
+      items: this.genItems(null, 100, 800, 1, 3)
     });
   },
   /**
@@ -63,8 +69,26 @@ var Display = View.extends({
   genRandomValue: function (min, max) {
     return parseInt(Math.random() * (max - min + 1) + min, 10);
   },
-  render: function () {
-
+  /**
+   * 아이템을 그림
+   * @param {Object[]} items 아이템 정보
+   * @return {Object} View
+   * */
+  render: function (items) {
+    var $$root = Utils.$("#" + this.componentElementId + "> .items")[0];
+    var chunk = [];
+    for (var item, i = 0, len = items.length; i < len; i++) {
+      item = items[i];
+      chunk.push(
+        this.itemTemplate({
+          productName: item.name,
+          price: item.price,
+          count: item.count
+        })
+      );
+    }
+    $$root.innerHTML = chunk.join("");
+    return this;
   }
 });
 

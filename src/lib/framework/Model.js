@@ -179,7 +179,7 @@ this.off = function (eventName, callback) {
     }
   } else {
     /**
-     * clear
+     * reset events
      * */
     events = {};
   }
