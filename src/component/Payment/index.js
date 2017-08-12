@@ -133,10 +133,11 @@ var Payment = new View({
   },
   dragEnd: function (e, target) {
     var targetId = target.getAttribute("id");
+    var targetParentId = target.parentNode.getAttribute("id");
     var dataTransferData = this._machineState.dataTransfer;
     var amount = dataTransferData.amount;
     if (amount) {
-      if (targetId === "deposit") {
+      if (targetId === "deposit" || targetParentId === "deposit") {
         this.insertAmount(amount);
       } else {
         this.log("돈을 떨어트렸습니다..");
