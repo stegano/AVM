@@ -12,6 +12,18 @@ var Payment = new View({
   initialize: function () {
     var that = this;
     /**
+     * 자판기의 상태
+     * @memberOf Payment
+     * @member {Object} _machineState
+     * */
+    this._machineState = {
+      billCount: 0,
+      maxAmount: 3000,
+      dataTransfer: {
+        amount: 0
+      }
+    };
+    /**
      * 모델 이벤트 바인딩
      * */
     this.model.on("change:myAccount", function (account) {
@@ -30,18 +42,12 @@ var Payment = new View({
      * */
     Utils.onEvent(Utils.$("#" + this.componentElementId), "click", function (e) {
       var target = e.srcElement;
-      if (target.parentNode.nodeName.toUpperCase() === "BUTTON") {
+      if (target.nodeName.toUpperCase() === "BUTTON" || target.parentNode.nodeName.toUpperCase() === "BUTTON") {
         that.clickReturnButton(e, target.parentNode);
       }
     });
     /**
-     * 마우스가 영역 밖으로 나가는 경우 드래그 이벤트를 종료
-     * */
-    Utils.onEvent(Utils.$("#" + this.componentElementId), "mouseleave", function (e) {
-      // that.dragCancel(e);
-    });
-    /**
-     * 마우스 다운로드시 드래그 시작
+     * 마우스 다운 이벤트시 드래그 시작
      * */
     Utils.onEvent(Utils.$("#" + this.componentElementId), "mousedown", function (e) {
       var target = e.srcElement;
@@ -50,11 +56,22 @@ var Payment = new View({
       }
     });
     /**
-     * 마우스 다운로드시 드래그 끝
+     * 마우스 업 이벤트 발생시 드래그 끝
      * */
     Utils.onEvent(document, "mouseup", function (e) {
       var target = e.srcElement;
       that.dragEnd(e, target);
+    });
+    /**
+     * 마우스 무브 이벤트 드래깅 이벤트 발생
+     * */
+    Utils.onEvent(Utils.$("#" + this.componentElementId), "mousemove", function (e) {
+      /**
+       * 상품을 선택하여 드래그하였을 때만 드래깅 이벤트 동작
+       * */
+      if (that._machineState.dataTransfer.amount !== 0) {
+        that.dragging(e, e.srcElement);
+      }
     });
   },
   updateMyAccount: function (value) {
@@ -75,29 +92,19 @@ var Payment = new View({
     });
     return this;
   },
-  updateDataTransfer: function (value) {
-    this.model.set({
-      dataTransfer: value
-    }, {
-      trigger: true
-    });
-    return this;
-  },
   clickReturnButton: function (e, target) {
     var deposit = this.model.get("deposit");
     this.updateDeposit(-deposit);
     this.updateMyAccount(deposit);
     if (deposit > 0) {
       this.log(Utils.comma(deposit) + "원을 돌려받았습니다.");
-      /**
-       * 자판기 상태를 초기로 돌림
-       * */
-      this.model.set({
-        machineState: {
-          billCount: 0,
-          maxAmount: 3000
+      this._machineState = {
+        billCount: 0,
+        maxAmount: 3000,
+        dataTransfer: {
+          amount: 0
         }
-      });
+      };
     } else {
       this.log("돌려받을 금액이 없네요..");
     }
@@ -105,11 +112,10 @@ var Payment = new View({
   },
   dragStart: function (e, target) {
     var amount = Number(target.getAttribute("data-amount")) || 0;
+    var dataTransferData = this._machineState.dataTransfer;
     if (this.model.get("myAccount") >= amount) {
       this.updateMyAccount(-amount);
-      this.updateDataTransfer({
-        amount: amount
-      });
+      dataTransferData.amount = amount;
       this.log(Utils.comma(amount) + "원을 꺼냈습니다!");
     } else {
       this.log("가지고 있는 돈이 부족합니다.");
@@ -117,23 +123,25 @@ var Payment = new View({
   },
   dragEnd: function (e, target) {
     var targetId = target.getAttribute("id");
-    var dataTransferData = this.model.get("dataTransfer");
+    var dataTransferData = this._machineState.dataTransfer;
     var amount = dataTransferData.amount;
-    console.log("amount: ", amount);
     if (amount) {
       if (targetId === "deposit") {
         this.insertAmount(amount);
       } else {
         this.log("돈을 떨어트렸습니다..");
       }
-      this.updateDataTransfer({});
+      dataTransferData.amount = 0;
     }
   },
+  dragging: function (e, target) {
+    // console.log(e);
+  },
   dragCancel: function (e, target) {
-    this.updateDataTransfer({});
+    this._machineState.dataTransfer.amount = 0;
   },
   insertAmount: function (amount) {
-    var machineState = this.model.get("machineState");
+    var machineState = this._machineState;
     var deposit = this.model.get("deposit");
     if ((amount + deposit) > machineState.maxAmount) {
       this.log("총 금액이 " + Utils.comma(machineState.maxAmount) + "원을 초과하여 더이상 넣을 수 없습니다.");
@@ -143,10 +151,7 @@ var Payment = new View({
       this.log("돈을 떨어트렸습니다..");
     } else {
       if (amount === 1000) {
-        ++machineState.billCount;
-        this.model.set({
-          machineState: machineState
-        });
+        ++this._machineState.billCount;
       }
       this.log(Utils.comma(amount) + "원을 넣었습니다!");
       this.updateDeposit(amount);
@@ -155,6 +160,7 @@ var Payment = new View({
   },
   /**
    * 콘솔 로그 생성
+   * @memberOf Payment;
    * @param {String} message
    * @return {Object} Payment
    * */

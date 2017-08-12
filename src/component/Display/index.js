@@ -38,6 +38,7 @@ var Display = new View({
   },
   /**
    * 콘솔 로그 생성
+   * @memberOf Display
    * @param {String} message
    * @return {Object} Display
    * */

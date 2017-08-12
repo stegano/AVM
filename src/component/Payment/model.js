@@ -5,11 +5,6 @@ var Model = require("../../lib/framework/Model");
  * */
 var PaymentModel = new Model({
   myAccount: 10000,
-  deposit: 0,
-  machineState: {
-    billCount: 0,
-    maxAmount: 3000
-  },
-  dataTransfer: {}
+  deposit: 0
 });
 module.exports = PaymentModel;
