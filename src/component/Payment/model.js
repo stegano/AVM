@@ -5,6 +5,12 @@ var Model = require("../../lib/framework/Model");
  * */
 var PaymentModel = new Model({
   myAccount: 10000,
-  deposit: 0
+  deposit: 0,
+  chargeAmountItems: [
+    50,
+    100,
+    500,
+    1000
+  ]
 });
 module.exports = PaymentModel;

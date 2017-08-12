@@ -13,6 +13,11 @@ var Display = new View({
   model: model,
   initialize: function () {
     var that = this;
+    /**
+     * 뷰에서 사용되는 아이템 템플릿
+     * @memberOf Payment
+     * @member {Function} replaceTemplateData
+     * */
     this.itemTemplate = Utils.template(Utils.$("#DisplayItemTemplate").innerHTML);
     /**
      * 모델 이벤트 바인딩

@@ -13,36 +13,190 @@ dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
+figure, figcaption, footer, header,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
+    font-family: "맑은 고딕", "Apple SD Gothic Neo", "Apple SD 산돌고딕 Neo", NanumGothic, "나눔고딕", ng, sans-serif;
+    font-weight: 300;
+    font-size: 100%;
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, header, menu, nav, section {
     display: block;
 }
+
 body {
     line-height: 1;
 }
+
 ol, ul {
     list-style: none;
 }
+
 blockquote, q {
     quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
     content: '';
     content: none;
 }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding-top: 50px;
+    background-color: #eee;
+}
+
+#app > * {
+    font-size: 14px;
+}
+
+#app a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* APP */
+#app {
+    margin: auto;
+    background-color: #eee;
+    border: solid 1px #ccc;
+    width: 400px;
+}
+
+/* DISPLAY */
+#display {
+    display: table;
+}
+
+#display > ul.items {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    margin-left: 1px;
+}
+
+#display > ul.items > li {
+    width: 100px;
+    height: 90px;
+    display: inline-block;
+    float: left;
+    margin-left: -1px;
+}
+
+#display > ul.items > li > a {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+#display > ul.items > li > a > .name {
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    background-color: #eee;
+}
+
+#display > ul.items > li > a > .price {
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    background-color: #333;
+    color: white;
+}
+
+/* PAYMENT */
+#payment {
+    width: 100%;
+    display: table;
+    clear: both;
+    padding: 5px;
+}
+
+#payment > div {
+    /*float: left;*/
+}
+
+#payment > #slot {
+    float: left;
+    width: 120px;
+    text-align: center;
+}
+
+#payment > #slot > #deposit {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    background-color: #0060ff;
+    margin-bottom: 5px;
+}
+
+#payment > #slot > #return {
+    width: 100%;
+}
+
+#payment > #wallet {
+    float: right;
+    padding: 5px;
+    background-color: #0060ff;
+}
+
+#payment > #wallet > ul.items > li {
+    width: 150px;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 5px;
+    padding: 0px 5px;
+    background-color: #03e1ff;
+}
+
+#payment > #wallet > ul.items > li > a {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+#payment > #wallet > p {
+    margin-top: 15px;
+}
+
+/* CONSOLE */
+#console {
+    clear: both;
+    height: 200px;
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+#console > ul.items > li {
+    height: 20px;
+    line-height: 20px;
 }

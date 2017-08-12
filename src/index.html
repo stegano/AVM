@@ -12,33 +12,40 @@
       -webkit-user-drag: none;
     }
   </style>
+  <!-- DisplayItemTemplate -->
   <script id="DisplayItemTemplate" type="text/template">
     <li>
       <a data-count="{{=count}}" data-price="{{=price}}" data-name="{{=productName}}" href="#">
-        <div>{{=productName}}</div>
-        <div>{{=price}}</div>
+        <div class="name">{{=productName}}</div>
+        <div class="price">{{=price}}</div>
       </a>
     </li>
   </script>
+  <!-- ConsoleLogItemTemplate -->
   <script id="ConsoleLogItemTemplate" type="text/template">
     <li>{{=logMessage}}</li>
+  </script>
+  <!-- PaymentWallerItemTemplate -->
+  <script id="PaymentWallerItemTemplate" type="text/template">
+    <li>
+      <a href="#" data-amount="{{=amount}}">
+        {{=amountString}}원
+      </a>
+    </li>
   </script>
   <style>
   </style>
 </head>
 <body>
-<div id="app" style="border: solid 1px black;">
+<div id="app">
   <!-- DISPLAY -->
-  <div id="display" style="width: 800px; height: 400px">
+  <div id="display">
     <ul class="items"></ul>
   </div>
   <!-- PAYMENT -->
   <div id="payment">
     <div id="slot">
-      <p>
-        <span>투입구</span>
-      </p>
-      <div id="deposit" style="width: 80px; height: 50px; background-color: blue;">
+      <div id="deposit">
         <span class="amount">0</span>
         <span>원</span>
       </div>
@@ -47,28 +54,7 @@
       </button>
     </div>
     <div id="wallet">
-      <ul class="items">
-        <li>
-          <a href="#" data-amount="50">
-            50원
-          </a>
-        </li>
-        <li>
-          <a href="#" data-amount="100">
-            100원
-          </a>
-        </li>
-        <li>
-          <a href="#" data-amount="500">
-            500원
-          </a>
-        </li>
-        <li>
-          <a href="#" data-amount="1000">
-            1,000원
-          </a>
-        </li>
-      </ul>
+      <ul class="items"></ul>
       <p>
         <span>지금 내돈</span>
         <span id="myAccount">
@@ -79,7 +65,7 @@
     </div>
   </div>
   <!-- CONSOLE -->
-  <div id="console" style="overflow: scroll; height: 100px; border: solid 1px blue;">
+  <div id="console">
     <ul class="items"></ul>
   </div>
 </div>

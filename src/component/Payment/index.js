@@ -12,6 +12,12 @@ var Payment = new View({
   initialize: function () {
     var that = this;
     /**
+     * 뷰에서 사용되는 아이템 템플릿
+     * @memberOf Payment
+     * @member {Function} replaceTemplateData
+     * */
+    this.itemTemplate = Utils.template(Utils.$("#PaymentWallerItemTemplate").innerHTML);
+    /**
      * 자판기의 상태
      * @memberOf Payment
      * @member {Object} _machineState
@@ -32,11 +38,15 @@ var Payment = new View({
     this.model.on("change:deposit", function (deposit) {
       that.renderUpdateDeposit(deposit);
     });
+    this.model.on("change:chargeAmountItems", function (chargeAmountItems) {
+      that.render(chargeAmountItems);
+    });
     /**
      * 현재 가진 금액을 초기화
      * */
     this.model.trigger("change:myAccount");
     this.model.trigger("change:deposit");
+    this.model.trigger("change:chargeAmountItems");
     /**
      * UI 이벤트 바인딩
      * */
@@ -189,6 +199,21 @@ var Payment = new View({
    * */
   renderUpdateDeposit: function (account) {
     Utils.$("#deposit > .amount")[0].innerText = Utils.comma(account);
+    return this;
+  },
+  render: function (chargeAmountItems) {
+    var $$root = Utils.$("#wallet > .items")[0];
+    var chunk = [];
+    for (var item, i = 0, len = chargeAmountItems.length; i < len; i++) {
+      item = chargeAmountItems[i];
+      chunk.push(
+        this.itemTemplate({
+          amount: item,
+          amountString: Utils.comma(item)
+        })
+      );
+    }
+    $$root.innerHTML = chunk.join("");
     return this;
   }
 });
