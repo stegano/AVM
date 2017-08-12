@@ -22,8 +22,8 @@ var Console = new View({
   /**
    * 최근 입력된 로그를 추가
    * @memberOf Console
-   * @param {String} log
-   * @return {View} Console
+   * @param {String} log 로그 메세지
+   * @return {Object} Console
    * */
   renderNewLog: function (log) {
     var $console = Utils.$("#console .items")[0];
@@ -36,7 +36,7 @@ var Console = new View({
   /**
    * 스크롤 최하단으로 이동
    * @memberOf Console
-   * @return {View} Console
+   * @return {Object} Console
    * */
   setScrollBottom: function () {
     var $consoleWrapper = Utils.$("#" + this.componentElementId);

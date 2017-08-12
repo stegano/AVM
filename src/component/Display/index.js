@@ -45,7 +45,7 @@ var Display = new View({
   /**
    * 콘솔 로그 생성
    * @memberOf Display
-   * @param {String} message
+   * @param {String} message 메세지
    * @return {Object} Display
    * */
   log: function (message) {
@@ -56,6 +56,13 @@ var Display = new View({
     });
     return this;
   },
+  /**
+   * 아이템 클릭 이벤트 핸들러
+   * @memberOf Display
+   * @param {Event} e 이벤트
+   * @param {HTMLElement} target 이벤트가 발생한 객체
+   * @return {Object} Display
+   * */
   clickItemAnchor: function (e, target) {
     event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     var name = target.getAttribute("data-name");

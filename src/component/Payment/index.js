@@ -84,6 +84,12 @@ var Payment = new View({
       }
     });
   },
+  /**
+   * `Payment.myAccount` 정보를 업데이트하고 강제로 트리거
+   * @memberOf Payment
+   * @param {Number} value 해당 값 만큼 기존 값에 더하거나 뺌
+   * @return {Object} Payments
+   * */
   updateMyAccount: function (value) {
     var myAccount = this.model.get("myAccount");
     this.model.set({
@@ -93,6 +99,12 @@ var Payment = new View({
     });
     return this;
   },
+  /**
+   * `Payment.deposit` 정보를 업데이트하고 강제로 트리거
+   * @memberOf Payment
+   * @param {Number} value 해당 값 만큼 기존 값에 더하거나 뺌
+   * @return {Object} Payments
+   * */
   updateDeposit: function (value) {
     var deposit = this.model.get("deposit");
     this.model.set({
@@ -102,6 +114,13 @@ var Payment = new View({
     });
     return this;
   },
+  /**
+   * 반환 버튼 클릭 이벤트 핸들러
+   * @memberOf Payment
+   * @param {Event} e 이벤트
+   * @param {HTMLElement} target 이벤트가 발생한 객체
+   * @return {Object} Payments
+   * */
   clickReturnButton: function (e, target) {
     var deposit = this.model.get("deposit");
     this.updateDeposit(-deposit);
@@ -120,6 +139,13 @@ var Payment = new View({
     }
     return this;
   },
+  /**
+   * 드래그 시작 이벤트 핸들러
+   * @memberOf Payment
+   * @param {Event} e 이벤트
+   * @param {HTMLElement} target 이벤트가 발생한 객체
+   * @return {Object} Payments
+   * */
   dragStart: function (e, target) {
     var amount = Number(target.getAttribute("data-amount")) || 0;
     var dataTransferData = this._machineState.dataTransfer;
@@ -131,6 +157,13 @@ var Payment = new View({
       this.log("가지고 있는 돈이 부족합니다.");
     }
   },
+  /**
+   * 드래그 종료 이벤트 핸들러
+   * @memberOf Payment
+   * @param {Event} e 이벤트
+   * @param {HTMLElement} target 이벤트가 발생한 객체
+   * @return {Object} Payments
+   * */
   dragEnd: function (e, target) {
     var targetId = target.getAttribute("id");
     var targetParentId = target.parentNode.getAttribute("id");
@@ -145,12 +178,21 @@ var Payment = new View({
       dataTransferData.amount = 0;
     }
   },
+  /**
+   * 드래깅 이벤트 핸들러
+   * @memberOf Payment
+   * @param {Event} e 이벤트
+   * @param {HTMLElement} target 이벤트가 발생한 객체
+   * @return {Object} Payments
+   * */
   dragging: function (e, target) {
-    // console.log(e);
   },
-  dragCancel: function (e, target) {
-    this._machineState.dataTransfer.amount = 0;
-  },
+  /**
+   * 금액 입력
+   * @memberOf Payment
+   * @param {Number} amount 입력된 금액
+   * @return {Object} Payments
+   * */
   insertAmount: function (amount) {
     var machineState = this._machineState;
     var deposit = this.model.get("deposit");
@@ -171,7 +213,7 @@ var Payment = new View({
   },
   /**
    * 콘솔 로그 생성
-   * @memberOf Payment;
+   * @memberOf Payment
    * @param {String} message
    * @return {Object} Payment
    * */
@@ -184,9 +226,9 @@ var Payment = new View({
     return this;
   },
   /**
-   * 현재 소유한 금액을 업데이트
+   * 현재 소지중인 금액을 업데이트
    * @memberOf Payment
-   * @param {Number} account
+   * @param {Number} account 현재 소지중인 금액
    * @return {Object} Payment
    * */
   renderUpdateMyAccount: function (account) {
@@ -202,6 +244,12 @@ var Payment = new View({
     Utils.$("#deposit > .amount")[0].innerText = Utils.comma(account);
     return this;
   },
+  /**
+   * 충전 가능한 금액 목록을 랜더
+   * @memberOf Payment
+   * @param {Object} chargeAmountItems 금액 목록 정보
+   * @return {Object} Payment
+   * */
   render: function (chargeAmountItems) {
     var $$root = Utils.$("#wallet > .items")[0];
     var chunk = [];
