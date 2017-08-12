@@ -7,8 +7,10 @@
   "devDependencies": {
     "chai": "^4.1.1",
     "eslint": "^4.4.1",
+    "extract-function": "^1.0.5",
     "extract-text-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^2.30.1",
+    "jsdoc": "^3.5.4",
     "mocha": "^3.5.0",
     "webpack": "^3.5.3"
   },
