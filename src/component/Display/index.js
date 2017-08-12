@@ -80,7 +80,7 @@ var Display = new View({
       for (var it, i = 0, len = items.length; i < len; i++) {
         it = items[i];
         if (it.name === name) {
-          items[i].count--;
+          --items[i].count;
           break;
         }
       }
@@ -151,7 +151,8 @@ var Display = new View({
         this.itemTemplate({
           productName: item.name,
           price: item.price,
-          count: item.count
+          count: item.count,
+          classList: item.count === 0 ? "soldout" : ""
         })
       );
     }

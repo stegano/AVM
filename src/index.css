@@ -66,6 +66,7 @@ html, body {
 }
 
 body {
+    overflow:hidden;
     padding-top: 50px;
     background-color: #eee;
 }
@@ -112,6 +113,17 @@ body {
     text-align: center;
     width: 100%;
     height: 100%;
+}
+
+#display > ul.items > li > a.soldout {
+    color: red;
+}
+
+#display > ul.items > li > a.soldout > .name {
+    background-color: lightpink;
+}
+#display > ul.items > li > a.soldout > .price {
+    color: gray;
 }
 
 #display > ul.items > li > a > .name {
@@ -200,3 +212,4 @@ body {
     height: 20px;
     line-height: 20px;
 }
+
