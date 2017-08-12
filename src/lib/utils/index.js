@@ -34,21 +34,27 @@ var Utils = {
   },
   /**
    * 숫자에 콤마 추가
+   * @param {Number} number 정수
+   * @return {String}
    * */
   comma: function (number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   },
   /**
    * 랜덤 숫자 생성
-   * @param {number} min 최소 값
-   * @param {number} max 최대 값
-   * @return {number} `min ~ max` 사이의 정수
+   * @param {Number} min 최소 값
+   * @param {Number} max 최대 값
+   * @return {Number} `min ~ max` 사이의 정수
    * */
   genRandomValue: function (min, max) {
     return parseInt(Math.random() * (max - min + 1) + min, 10);
   },
   /**
    * DOM 이벤트 바인딩
+   * @param {HTMLElement} element 엘리먼트 이름
+   * @param {String} eventName 이벤트 이름
+   * @param {Function} callback 콜백 함수
+   * @return {HTMLElement}
    * */
   onEvent: function (element, eventName, callback) {
     if ("addEventListener" in element) {
