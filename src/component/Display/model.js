@@ -4,6 +4,16 @@ var Model = require("../../lib/framework/Model");
  * @namespace DisplayModel
  * */
 var DisplayModel = new Model({
-  items: []
+  items: [],
+  itemNames: [
+    "펩시",
+    "V10",
+    "거름",
+    "맹물",
+    "환타",
+    "식혜",
+    "국물",
+    "박카스"
+  ]
 });
 module.exports = DisplayModel;

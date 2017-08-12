@@ -28,8 +28,9 @@ var Display = new View({
     /**
      * 기본 설정으로 아이템 생성
      * */
+    var itemNames = this.model.get("itemNames");
     this.model.set({
-      items: this.genItems(null, 100, 800, 1, 3)
+      items: this.genItems(itemNames, 100, 800, 1, 3)
     });
     /**
      * UI 이벤트 바인딩
@@ -109,16 +110,7 @@ var Display = new View({
    * @return {Object[]} items 랜덤 순서, 랜덤 가격, 랜덤 갯수로 생성된 아이템 배열
    * */
   genItems: function (itemNames, minPrice, maxPrice, minCount, maxCount) {
-    var _itemNames = itemNames instanceof Array ? itemNames : [
-      "펩시",
-      "V10",
-      "거름",
-      "맹물",
-      "환타",
-      "식혜",
-      "국물",
-      "박카스"
-    ];
+    var _itemNames = itemNames instanceof Array ? itemNames : [];
     var _minPrice = Number(minPrice) || 100;
     var _maxPrice = Number(maxPrice) || 800;
     var _minCount = Number(minCount) || 1;
