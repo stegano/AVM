@@ -2,7 +2,7 @@ var View = require("../../lib/framework/View");
 var Utils = require("../../lib/utils");
 var model = require("./model");
 /**
- * 판매 상품을 보여주는 뷰 컴포넌트
+ * 콘솔을 보여주는 뷰 컴포넌트
  * @namespace Console
  * */
 var Console = View.extend({

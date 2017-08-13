@@ -3,7 +3,7 @@ var Utils = require("../../lib/utils");
 var model = require("./model");
 var ConsoleModel = require("../Console/model");
 /**
- * 판매 상품을 보여주는 뷰 컴포넌트
+ * 결제 관련을 보여주는 뷰 컴포넌트
  * @namespace Payment
  * */
 var Payment = View.extend({

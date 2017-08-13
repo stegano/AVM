@@ -3,7 +3,6 @@ var Utils = require("../../lib/utils");
 var model = require("./model");
 var PaymentModel = require("../Payment/model");
 var ConsoleModel = require("../Console/model");
-
 /**
  * 판매 상품을 보여주는 뷰 컴포넌트
  * @namespace Display
