@@ -15,7 +15,7 @@ var PaymentModel = new Model({
    * @memberOf PaymentModel
    * @type {Number}
    * */
-  deposit: 99999990,
+  deposit: 0,
   /**
    * 자판기에 넣을 수 있는 금액
    * @memberOf DisplayModel
