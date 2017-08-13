@@ -10,6 +10,11 @@ var Payment = View.extend({
   model: model,
   initialize: function (data) {
     var that = this;
+    /**
+     * 해당 컴포넌트의 최상위 DOMElementId
+     * @memberOf Payment
+     * @member {Function} String
+     * */
     this.componentRootElementId = data.componentRootElementId;
     /**
      * 뷰에서 사용되는 아이템 템플릿
