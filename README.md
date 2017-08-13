@@ -11,7 +11,7 @@
 
 ### `v1.0.0 > v2.0.0` 변경된 코드
 
-- https://github.com/rfc4252/AVM/compare/master...additional
+- https://github.com/rfc4252/AVM/compare/v1.0.0...v2.0.0
 
 ### 개발 결과물
 
