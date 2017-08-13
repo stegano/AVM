@@ -22,7 +22,7 @@ npm run build
  
 - `src/component`
 
-  - `Console`, `Display`, `Payment` 세개의 컴포넌트는 각각 하나의 `View`와 `Model`을 가지고 있습니다. 서로 다른 컴포넌트 간 의존성과 복잡성을 줄이기 위해 `View - View`끼리 접근 하지 않도록 구현하였고, 필요한 경우 다른 컴포넌트의 `Model`의 데이터를 업데이트하여 처리합니다.(원래 [MVVM](https://justhackem.wordpress.com/2017/03/05/mvvm-architectural-pattern/) 패턴을 의도 하였습니다. :))
+  - `Console`, `Display`, `Payment` 세개의 컴포넌트는 각각 하나의 `View`와 `Model`을 가지고 있습니다. 서로 다른 컴포넌트 간 의존성과 복잡성을 줄이기 위해 `View - View`끼리 접근 하지 않도록 구현하였고, 필요한 경우 다른 컴포넌트의 `Model`의 데이터를 업데이트하여 처리하도록 하였습니다.
 
 ### 의존성 모듈 설치
 
@@ -42,7 +42,7 @@ npm run docs
 
 ### 유닛 테스트
 
-테스트는 [Node](https://nodejs.org)에서 실행되는 [mocha](https://mochajs.org/)와 [chai](http://chaijs.com/)를 이용한 유닛 테스트 입니다.
+테스트는 [mocha](https://mochajs.org/)와 [chai](http://chaijs.com/)를 이용하여 [Node](https://nodejs.org)에서 실행되는 유닛 테스트 입니다.
 
 ```bash
 npm test
