@@ -122,19 +122,6 @@ var Model = function (defaultValue, extOptions) {
   this._getEvents = function () {
     return events;
   };
-  /**
-   * 현재 구현된 모델을 확장하여 리턴하는 객체
-   * */
-  this.extends = function (extDefaultValue) {
-    var _defaultValue = utils.extends(extDefaultValue, defaultValue);
-    return utils.bind(Model, this, _defaultValue);
-  };
-};
-/**
- * 사용자가 직접 `Model`객체를 구현하고 확장하여 사용할 수 있도록하는 함수
- * */
-Model.extends = function (defaultOptions) {
-  return utils.bind(Model, Model, defaultOptions);
 };
 
 module.exports = Model;
