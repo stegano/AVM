@@ -9,6 +9,13 @@ describe("`Utils` 테스트", function () {
     var expected = "<div>HELLO:)</div>";
     expect(actual).to.equal(expected);
   });
+  it("`template` 테스트(치환 후 남아있는 문자열 제거)", function () {
+    var actual = Utils.template("{{=data1}}<div>{{=message}}</div>{{=data2}}")({
+      message: "HELLO:)"
+    });
+    var expected = "<div>HELLO:)</div>";
+    expect(actual).to.equal(expected);
+  });
   it("`comma` 테스트", function () {
     var actual = null;
     var expected = null;

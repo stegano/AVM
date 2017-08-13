@@ -4,7 +4,8 @@
  * @private
  * */
 var regExp = {
-  comma: /\B(?=(\d{3})+(?!\d))/g
+  comma: /\B(?=(\d{3})+(?!\d))/g,
+  templateInterpolate: /{{=.+?}}/gm
 };
 /**
  * 유틸 함수
@@ -20,13 +21,16 @@ var Utils = {
   template: function (htmlString) {
     var _htmlTemplate = htmlString.replace(/^\s*|\s*$/gm, "");
     /**
+     * 입력된 정보로 템플릿의 값을 치환
      * @param {Object} data 치환할 데이터
+     * @return {String} htmlString
      * */
     return function replaceTemplateData(data) {
       var ret = _htmlTemplate;
       for (var n in data) {
         ret = ret.replace(new RegExp("{{=" + n + "}}", "gm"), data[n]);
       }
+      ret = ret.replace(regExp.templateInterpolate, '');
       return ret;
     };
   },
