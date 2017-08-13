@@ -175,7 +175,7 @@ var Payment = View.extend({
     var target = el.cloneNode(true);
     var targetId = "dragItem";
     target.setAttribute("id", targetId);
-    this.moveDragItemEl(offsetX, offsetY, target);
+    this.moveDragItemEl(x, y, target);
     Utils.$("#app").appendChild(target);
     this._machineState.$dragItemEl = target;
     return this;
