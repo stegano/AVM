@@ -1,5 +1,9 @@
 # Automatic Vending Machine
 
+## `v1.0.0 > additional` 변경된 코드
+
+- https://github.com/rfc4252/AVM/compare/master...additional
+
 ### 개발 결과물
 
 개발 결과물은 `dist/index.html`을 실행하여 바로 확인하실 수 있습니다. :)
