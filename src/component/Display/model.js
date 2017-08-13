@@ -16,4 +16,5 @@ var DisplayModel = new Model({
     "박카스"
   ]
 });
+
 module.exports = DisplayModel;

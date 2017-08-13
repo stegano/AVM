@@ -6,4 +6,5 @@ var Model = require("../../lib/framework/Model");
 var ConsoleModel = new Model({
   log: null
 });
+
 module.exports = ConsoleModel;

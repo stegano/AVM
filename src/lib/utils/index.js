@@ -63,6 +63,31 @@ var Utils = {
       element.attachEvent("on" + eventName, callback);
     }
     return element;
+  },
+  /**
+   * `Function.prototype.bind` 구현
+   * @param {Function} func 함수
+   * @param {Object} context 함수 실행시점 컨텍스트
+   * @param {Array} args 입력 값들
+   * */
+  bind: function (func, context, args) {
+    var bindArgs = Array.prototype.slice.call(arguments, 2);
+    return function () {
+      var execFuncArgs = Array.prototype.slice.call(arguments, 0);
+      return func.apply(context, bindArgs.concat(execFuncArgs));
+    };
+  },
+  /**
+   * `Object`를 확장하는 함수
+   * @param {Object} targetObject 확장될 대상
+   * @param {Object} sourceObject 확장할 소스
+   * @return {Object} targetObject 확장된 대상 오브젝트
+   * */
+  extend: function (targetObject, sourceObject) {
+    for (var n in sourceObject) {
+      targetObject[n] = sourceObject[n];
+    }
+    return targetObject;
   }
 };
 

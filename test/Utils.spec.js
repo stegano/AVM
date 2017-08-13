@@ -40,4 +40,37 @@ describe("`Utils` 테스트", function () {
       expect(actual).to.above(1).to.below(6);
     }
   });
+  it("`bind` 테스트", function () {
+    function test(a, b, c) {
+      return [a, b, c];
+    }
+
+    var actual = Utils.bind(test, this, 1, 2, 3)();
+    var expected = [1, 2, 3];
+    expect(actual).to.deep.equal(expected);
+  });
+  it("`bind` `this Binding` 테스트", function () {
+    function thisName(a, b, c) {
+      return this.name;
+    }
+
+    var actual = Utils.bind(thisName, {name: "aa"}, 1, 2, 3);
+    var expected = "aa";
+    expect(actual()).to.equal(expected);
+  });
+  it("`extend` 테스트", function () {
+    var target = {
+      a: 1
+    };
+    var actual = Utils.extend(target, {
+      b: 1,
+      c: 1
+    });
+    var expected = {
+      a: 1,
+      b: 1,
+      c: 1
+    };
+    expect(actual).to.deep.equal(expected);
+  });
 });

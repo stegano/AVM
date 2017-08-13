@@ -5,7 +5,7 @@ var model = require("./model");
  * 판매 상품을 보여주는 뷰 컴포넌트
  * @namespace Console
  * */
-var Console = new View({
+var Console = View.extend({
   componentElementId: "console",
   model: model,
   initialize: function () {

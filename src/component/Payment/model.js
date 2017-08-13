@@ -13,4 +13,5 @@ var PaymentModel = new Model({
     1000
   ]
 });
+
 module.exports = PaymentModel;
