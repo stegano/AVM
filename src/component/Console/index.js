@@ -1,5 +1,6 @@
 var View = require("../../lib/framework/View");
 var Utils = require("../../lib/utils");
+var $ = Utils.$;
 var model = require("./model");
 /**
  * 콘솔을 보여주는 뷰 컴포넌트
@@ -20,7 +21,7 @@ var Console = View.extend({
      * @memberOf Console
      * @member {Function} replaceTemplateData
      * */
-    this.itemTemplate = Utils.template(Utils.$("#ConsoleLogItemTemplate").innerHTML);
+    this.itemTemplate = Utils.template($("#ConsoleLogItemTemplate").html());
     /**
      * 모델 이벤트 바인딩
      * */
@@ -36,11 +37,11 @@ var Console = View.extend({
    * @return {Object} Console
    * */
   renderNewLog: function (log) {
-    var $console = Utils.$("#console .items")[0];
-    var logs = $console.innerHTML + this.itemTemplate({
+    var $console = $("#console .items");
+    var logs = $console.html() + this.itemTemplate({
         logMessage: log
       });
-    $console.innerHTML = logs;
+    $console.html(logs);
     return this;
   },
   /**
@@ -49,8 +50,8 @@ var Console = View.extend({
    * @return {Object} Console
    * */
   setScrollBottom: function () {
-    var $consoleWrapper = Utils.$("#" + this.componentRootElementId);
-    $consoleWrapper.scrollTop = $consoleWrapper.scrollHeight;
+    var $consoleWrapper = $("#" + this.componentRootElementId);
+    $consoleWrapper[0].scrollTop = $consoleWrapper[0].scrollHeight;
     return this;
   }
 });

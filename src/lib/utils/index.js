@@ -1,3 +1,5 @@
+var Selector = require("./selector");
+var selector = new Selector();
 /**
  * 정규식 패턴
  * @memberOf Utils
@@ -7,6 +9,7 @@ var regExp = {
   comma: /\B(?=(\d{3})+(?!\d))/g,
   templateInterpolate: /{{=.+?}}/gm
 };
+
 /**
  * 유틸 함수
  * @namespace Utils
@@ -34,21 +37,8 @@ var Utils = {
       return ret;
     };
   },
-  /**
-   * `querySelector`를 좀 더 편하게 사용하기 위한 함수
-   * @memberOf Utils
-   * @param {String} querySelector 셀렉터
-   * @return {HTMLElement}
-   * */
   $: function (querySelector) {
-    var ret = null;
-    var fragments = querySelector.split(" ");
-    if (fragments[fragments.length - 1][0] === "#") {
-      ret = document.querySelector(querySelector);
-    } else {
-      ret = document.querySelectorAll(querySelector);
-    }
-    return ret;
+    return selector.find(querySelector);
   },
   /**
    * 숫자에 콤마 추가
@@ -68,22 +58,6 @@ var Utils = {
    * */
   genRandomValue: function (min, max) {
     return parseInt(Math.random() * (max - min + 1) + min, 10);
-  },
-  /**
-   * DOM 이벤트 바인딩
-   * @memberOf Utils
-   * @param {HTMLElement} element 엘리먼트 이름
-   * @param {String} eventName 이벤트 이름
-   * @param {Function} callback 콜백 함수
-   * @return {HTMLElement}
-   * */
-  onEvent: function (element, eventName, callback) {
-    if ("addEventListener" in element) {
-      element.addEventListener(eventName, callback);
-    } else {
-      element.attachEvent("on" + eventName, callback);
-    }
-    return element;
   },
   /**
    * `Function.prototype.bind` 구현

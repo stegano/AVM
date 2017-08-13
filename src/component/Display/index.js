@@ -1,5 +1,6 @@
 var View = require("../../lib/framework/View");
 var Utils = require("../../lib/utils");
+var $ = Utils.$;
 var model = require("./model");
 var PaymentModel = require("../Payment/model");
 var ConsoleModel = require("../Console/model");
@@ -22,7 +23,7 @@ var Display = View.extend({
      * @memberOf Payment
      * @member {Function} replaceTemplateData
      * */
-    this.itemTemplate = Utils.template(Utils.$("#DisplayItemTemplate").innerHTML);
+    this.itemTemplate = Utils.template($("#DisplayItemTemplate").html());
     /**
      * 모델 이벤트 바인딩
      * */
@@ -39,11 +40,8 @@ var Display = View.extend({
     /**
      * UI 이벤트 바인딩
      * */
-    Utils.onEvent(Utils.$("#" + this.componentRootElementId), "click", function (e) {
-      var target = e.srcElement;
-      if (target.parentNode && target.parentNode.nodeName.toUpperCase() === "A") {
-        that.clickItemAnchor(e, target.parentNode);
-      }
+    $("#" + this.componentRootElementId).on("click", "a[data-count]", function (e) {
+      that.clickItemAnchor(e, e.custom.target);
     });
   },
   /**
@@ -69,9 +67,9 @@ var Display = View.extend({
    * */
   clickItemAnchor: function (e, target) {
     event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-    var name = target.getAttribute("data-name");
-    var price = Number(target.getAttribute("data-price")) || 0;
-    var count = Number(target.getAttribute("data-count")) || 0;
+    var name = $(target).attr("data-name");
+    var price = Number($(target).attr("data-price")) || 0;
+    var count = Number($(target).attr("data-count")) || 0;
     var deposit = PaymentModel.get("deposit");
     this.log("[" + name + "](을)를 선택 하셨습니다.");
     if (count === 0) {
@@ -146,7 +144,7 @@ var Display = View.extend({
    * @return {Object} Display
    * */
   render: function (items) {
-    var $$root = Utils.$("#" + this.componentRootElementId + "> .items")[0];
+    var $root = $("#" + this.componentRootElementId + "> .items");
     var chunk = [];
     for (var item, i = 0, len = items.length; i < len; i++) {
       item = items[i];
@@ -159,7 +157,7 @@ var Display = View.extend({
         })
       );
     }
-    $$root.innerHTML = chunk.join("");
+    $root.html(chunk.join(""));
     return this;
   }
 });

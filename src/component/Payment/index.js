@@ -1,5 +1,6 @@
 var View = require("../../lib/framework/View");
 var Utils = require("../../lib/utils");
+var $ = Utils.$;
 var model = require("./model");
 var ConsoleModel = require("../Console/model");
 /**
@@ -21,7 +22,7 @@ var Payment = View.extend({
      * @memberOf Payment
      * @member {Function} replaceTemplateData
      * */
-    this.itemTemplate = Utils.template(Utils.$("#PaymentWallerItemTemplate").innerHTML);
+    this.itemTemplate = Utils.template($("#PaymentWallerItemTemplate").html());
     /**
      * 자판기의 상태
      * @memberOf Payment
@@ -56,32 +57,26 @@ var Payment = View.extend({
     /**
      * UI 이벤트 바인딩
      * */
-    Utils.onEvent(document.body, "click", function (e) {
-      var target = e.srcElement;
-      if (target.nodeName.toUpperCase() === "BUTTON" || (target.parentNode && target.parentNode.nodeName.toUpperCase() === "BUTTON")) {
-        that.clickReturnButton(e, target.parentNode);
-      }
+    $(document.body).on("click", "button", function (e) {
+      that.clickReturnButton(e, e.custom.target);
     });
     /**
      * 마우스 다운 이벤트시 -> 드래그 시작
      * */
-    Utils.onEvent(document.body, "mousedown", function (e) {
-      var target = e.srcElement;
-      if (target.nodeName.toUpperCase() === "A") {
-        that.dragStart(e, target);
-      }
+    $(document.body).on("mousedown", "#wallet a[data-amount]", function (e) {
+      that.dragStart(e, e.custom.target);
     });
     /**
      * 마우스 업 이벤트 발생시 -> 드래그 끝
      * */
-    Utils.onEvent(document.body, "mouseup", function (e) {
+    $(document.body).on("mouseup", function (e) {
       var target = e.srcElement;
       that.dragEnd(e, target);
     });
     /**
      * 마우스 무브 이벤트 -> 드래깅 이벤트 발생
      * */
-    Utils.onEvent(document.body, "mousemove", function (e) {
+    $(document.body).on("mousemove", function (e) {
       /**
        * 상품을 선택하여 -> 드래그하였을 때만 드래깅 이벤트 동작
        * */
@@ -153,7 +148,7 @@ var Payment = View.extend({
    * @return {Object} Payments
    * */
   dragStart: function (e, target) {
-    var amount = Number(target.getAttribute("data-amount")) || 0;
+    var amount = Number($(target).attr("data-amount")) || 0;
     var dataTransferData = this._machineState.dataTransfer;
     if (this.model.get("myAccount") >= amount) {
       this.updateMyAccount(-amount);
@@ -175,9 +170,9 @@ var Payment = View.extend({
   cloneDragItemEl: function (el, x, y) {
     var target = el.cloneNode(true);
     var targetId = "dragItem";
-    target.setAttribute("id", targetId);
+    $(target).attr("id", targetId);
     this.moveDragItemEl(x, y, target);
-    Utils.$("#app").appendChild(target);
+    $("#app")[0].appendChild(target);
     this._machineState.$dragItemEl = target;
     return this;
   },
@@ -213,8 +208,8 @@ var Payment = View.extend({
    * @return {Object} Payments
    * */
   dragEnd: function (e, target) {
-    var targetId = target.getAttribute("id");
-    var targetParentId = target.parentNode.getAttribute("id");
+    var targetId = $(target).attr("id");
+    var targetParentId = $(target.parentNode).attr("id");
     var dataTransferData = this._machineState.dataTransfer;
     var amount = dataTransferData.amount;
     if (amount) {
@@ -282,7 +277,7 @@ var Payment = View.extend({
    * @return {Object} Payment
    * */
   renderUpdateMyAccount: function (account) {
-    Utils.$("#myAccount > .amount")[0].innerText = Utils.comma(account);
+    $("#myAccount > .amount").text(Utils.comma(account));
     return this;
   },
   /**
@@ -291,7 +286,7 @@ var Payment = View.extend({
    * @return {Object} Payment
    * */
   renderUpdateDeposit: function (account) {
-    Utils.$("#deposit > .amount")[0].innerText = Utils.comma(account);
+    $("#deposit > .amount").text(Utils.comma(account));
     return this;
   },
   /**
@@ -301,7 +296,7 @@ var Payment = View.extend({
    * @return {Object} Payment
    * */
   render: function (chargeAmountItems) {
-    var $$root = Utils.$("#wallet > .items")[0];
+    var $root = $("#wallet > .items");
     var chunk = [];
     for (var item, i = 0, len = chargeAmountItems.length; i < len; i++) {
       item = chargeAmountItems[i];
@@ -312,7 +307,7 @@ var Payment = View.extend({
         })
       );
     }
-    $$root.innerHTML = chunk.join("");
+    $root.html(chunk.join(""));
     return this;
   }
 });
