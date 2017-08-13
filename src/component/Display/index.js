@@ -6,7 +6,9 @@ var PaymentModel = require("../Payment/model");
 var ConsoleModel = require("../Console/model");
 /**
  * 판매 상품을 보여주는 뷰 컴포넌트
- * @namespace Display
+ * @class
+ * @constructor
+ * @extends View
  * */
 var Display = View.extend({
   model: model,
