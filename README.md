@@ -1,6 +1,15 @@
+[![GitHub release](https://img.shields.io/github/release/rfc4252/AVM.svg)]()
+
 # Automatic Vending Machine
 
-## `v1.0.0 > additional` 변경된 코드
+### v2.0.0
+
+- `lib/framework/View.js` -> 확장 가능한 구조로 개선
+- `lib/framework/Model.js` -> 일부 함수를 `Model.prototype`으로 이동시켜 성능 개선
+- `lib/utils/selector.js` -> jQuery-style 돔 셀렉터 유틸 추가
+  - 각 뷰에 해당 유틸을 적용한 코드 적용
+
+### `v1.0.0 > v2.0.0` 변경된 코드
 
 - https://github.com/rfc4252/AVM/compare/master...additional
 
