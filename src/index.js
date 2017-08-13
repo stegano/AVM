@@ -10,9 +10,15 @@ var Console = require("./component/Console");
  * 이 함수는 `DOMContents`가 모두 로드된 이후에 실행.
  * */
 function startApp() {
-  Display.execute();
-  Payment.execute();
-  Console.execute();
+  Display.execute({
+    componentRootElementId: "display"
+  });
+  Payment.execute({
+    componentRootElementId: "payment"
+  });
+  Console.execute({
+    componentRootElementId: "console"
+  });
 }
 
 if (document && "DOMContentLoaded" in document) {

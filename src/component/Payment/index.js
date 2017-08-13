@@ -7,10 +7,10 @@ var ConsoleModel = require("../Console/model");
  * @namespace Payment
  * */
 var Payment = View.extend({
-  componentElementId: "payment",
   model: model,
-  initialize: function () {
+  initialize: function (data) {
     var that = this;
+    this.componentRootElementId = data.componentRootElementId;
     /**
      * 뷰에서 사용되는 아이템 템플릿
      * @memberOf Payment
@@ -50,7 +50,7 @@ var Payment = View.extend({
     /**
      * UI 이벤트 바인딩
      * */
-    Utils.onEvent(Utils.$("#" + this.componentElementId), "click", function (e) {
+    Utils.onEvent(Utils.$("#" + this.componentRootElementId), "click", function (e) {
       var target = e.srcElement;
       if (target.nodeName.toUpperCase() === "BUTTON" || target.parentNode.nodeName.toUpperCase() === "BUTTON") {
         that.clickReturnButton(e, target.parentNode);
@@ -59,7 +59,7 @@ var Payment = View.extend({
     /**
      * 마우스 다운 이벤트시 드래그 시작
      * */
-    Utils.onEvent(Utils.$("#" + this.componentElementId), "mousedown", function (e) {
+    Utils.onEvent(Utils.$("#" + this.componentRootElementId), "mousedown", function (e) {
       var target = e.srcElement;
       if (target.nodeName.toUpperCase() === "A") {
         that.dragStart(e, target);
@@ -75,7 +75,7 @@ var Payment = View.extend({
     /**
      * 마우스 무브 이벤트 드래깅 이벤트 발생
      * */
-    Utils.onEvent(Utils.$("#" + this.componentElementId), "mousemove", function (e) {
+    Utils.onEvent(Utils.$("#" + this.componentRootElementId), "mousemove", function (e) {
       /**
        * 상품을 선택하여 드래그하였을 때만 드래깅 이벤트 동작
        * */

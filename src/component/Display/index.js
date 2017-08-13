@@ -8,10 +8,10 @@ var ConsoleModel = require("../Console/model");
  * @namespace Display
  * */
 var Display = View.extend({
-  componentElementId: "display",
   model: model,
-  initialize: function () {
+  initialize: function (data) {
     var that = this;
+    this.componentRootElementId = data.componentRootElementId;
     /**
      * 뷰에서 사용되는 아이템 템플릿
      * @memberOf Payment
@@ -34,7 +34,7 @@ var Display = View.extend({
     /**
      * UI 이벤트 바인딩
      * */
-    Utils.onEvent(Utils.$("#" + this.componentElementId), "click", function (e) {
+    Utils.onEvent(Utils.$("#" + this.componentRootElementId), "click", function (e) {
       var target = e.srcElement;
       if (target.parentNode.nodeName.toUpperCase() === "A") {
         that.clickItemAnchor(e, target.parentNode);
@@ -141,7 +141,7 @@ var Display = View.extend({
    * @return {Object} Display
    * */
   render: function (items) {
-    var $$root = Utils.$("#" + this.componentElementId + "> .items")[0];
+    var $$root = Utils.$("#" + this.componentRootElementId + "> .items")[0];
     var chunk = [];
     for (var item, i = 0, len = items.length; i < len; i++) {
       item = items[i];

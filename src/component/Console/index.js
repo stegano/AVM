@@ -6,10 +6,15 @@ var model = require("./model");
  * @namespace Console
  * */
 var Console = View.extend({
-  componentElementId: "console",
   model: model,
-  initialize: function () {
+  initialize: function (data) {
     var that = this;
+    this.componentRootElementId = data.componentRootElementId;
+    /**
+     * 뷰에서 사용되는 아이템 템플릿
+     * @memberOf Console
+     * @member {Function} replaceTemplateData
+     * */
     this.itemTemplate = Utils.template(Utils.$("#ConsoleLogItemTemplate").innerHTML);
     /**
      * 모델 이벤트 바인딩
@@ -39,7 +44,7 @@ var Console = View.extend({
    * @return {Object} Console
    * */
   setScrollBottom: function () {
-    var $consoleWrapper = Utils.$("#" + this.componentElementId);
+    var $consoleWrapper = Utils.$("#" + this.componentRootElementId);
     $consoleWrapper.scrollTop = $consoleWrapper.scrollHeight;
     return this;
   }
