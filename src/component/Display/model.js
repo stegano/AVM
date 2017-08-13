@@ -4,7 +4,17 @@ var Model = require("../../lib/framework/Model");
  * @namespace DisplayModel
  * */
 var DisplayModel = new Model({
+  /**
+   * 화면에 보여질 아이템 목록
+   * @memberOf DisplayModel
+   * @type {Object[]}
+   * */
   items: [],
+  /**
+   * 뷰에서 생성할 아이템 이름 목록
+   * @memberOf DisplayModel
+   * @type {String[]}
+   * */
   itemNames: [
     "펩시",
     "V10",

@@ -5,8 +5,22 @@ var utils = require("../utils");
  * @constructor
  * */
 var Model = function (defaultValue, extOptions) {
+  /**
+   * 데이터 저장소
+   * @private
+   * @type {Object}
+   * */
   var modelData = utils.extend(defaultValue, extOptions) || {};
+  /**
+   * 이벤트 저장소
+   * @private
+   * @type {Object}
+   * */
   var events = {};
+  /**
+   * `prototype`에서 접근하기 위한 참조
+   * @type {Object}
+   * */
   this.__private__ = {
     modelData: modelData,
     events: events

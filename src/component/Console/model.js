@@ -4,6 +4,11 @@ var Model = require("../../lib/framework/Model");
  * @namespace ConsoleModel
  * */
 var ConsoleModel = new Model({
+  /**
+   * 로그
+   * @memberOf ConsoleModel
+   * @type {String}
+   * */
   log: null
 });
 

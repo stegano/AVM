@@ -4,8 +4,23 @@ var Model = require("../../lib/framework/Model");
  * @namespace PaymentModel
  * */
 var PaymentModel = new Model({
+  /**
+   * 소유 금액
+   * @memberOf PaymentModel
+   * @type {Number}
+   * */
   myAccount: 10000,
+  /**
+   * 자판기에 넣은 금액
+   * @memberOf PaymentModel
+   * @type {Number}
+   * */
   deposit: 0,
+  /**
+   * 자판기에 넣을 수 있는 금액
+   * @memberOf DisplayModel
+   * @type {Number[]}
+   * */
   chargeAmountItems: [
     50,
     100,
