@@ -41,7 +41,7 @@ var Display = View.extend({
      * */
     Utils.onEvent(Utils.$("#" + this.componentRootElementId), "click", function (e) {
       var target = e.srcElement;
-      if (target.parentNode.nodeName.toUpperCase() === "A") {
+      if (target.parentNode && target.parentNode.nodeName.toUpperCase() === "A") {
         that.clickItemAnchor(e, target.parentNode);
       }
     });

@@ -58,7 +58,7 @@ var Payment = View.extend({
      * */
     Utils.onEvent(document.body, "click", function (e) {
       var target = e.srcElement;
-      if (target.nodeName.toUpperCase() === "BUTTON" || target.parentNode.nodeName.toUpperCase() === "BUTTON") {
+      if (target.nodeName.toUpperCase() === "BUTTON" || (target.parentNode && target.parentNode.nodeName.toUpperCase() === "BUTTON")) {
         that.clickReturnButton(e, target.parentNode);
       }
     });
