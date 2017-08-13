@@ -83,6 +83,7 @@ body {
 
 /* APP */
 #app {
+    position: relative;
     margin: auto;
     background-color: #eee;
     border: solid 1px #ccc;
@@ -215,3 +216,11 @@ body {
     line-height: 20px;
 }
 
+#dragItem {
+    position: fixed;
+    background-color: greenyellow;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}

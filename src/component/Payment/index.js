@@ -31,6 +31,7 @@ var Payment = View.extend({
       billCount: 0,
       maxAmount: 3000,
       dataTransfer: {
+        $dragItemEl: null,
         amount: 0
       }
     };
@@ -55,34 +56,34 @@ var Payment = View.extend({
     /**
      * UI 이벤트 바인딩
      * */
-    Utils.onEvent(Utils.$("#" + this.componentRootElementId), "click", function (e) {
+    Utils.onEvent(document.body, "click", function (e) {
       var target = e.srcElement;
       if (target.nodeName.toUpperCase() === "BUTTON" || target.parentNode.nodeName.toUpperCase() === "BUTTON") {
         that.clickReturnButton(e, target.parentNode);
       }
     });
     /**
-     * 마우스 다운 이벤트시 드래그 시작
+     * 마우스 다운 이벤트시 -> 드래그 시작
      * */
-    Utils.onEvent(Utils.$("#" + this.componentRootElementId), "mousedown", function (e) {
+    Utils.onEvent(document.body, "mousedown", function (e) {
       var target = e.srcElement;
       if (target.nodeName.toUpperCase() === "A") {
         that.dragStart(e, target);
       }
     });
     /**
-     * 마우스 업 이벤트 발생시 드래그 끝
+     * 마우스 업 이벤트 발생시 -> 드래그 끝
      * */
-    Utils.onEvent(document, "mouseup", function (e) {
+    Utils.onEvent(document.body, "mouseup", function (e) {
       var target = e.srcElement;
       that.dragEnd(e, target);
     });
     /**
-     * 마우스 무브 이벤트 드래깅 이벤트 발생
+     * 마우스 무브 이벤트 -> 드래깅 이벤트 발생
      * */
-    Utils.onEvent(Utils.$("#" + this.componentRootElementId), "mousemove", function (e) {
+    Utils.onEvent(document.body, "mousemove", function (e) {
       /**
-       * 상품을 선택하여 드래그하였을 때만 드래깅 이벤트 동작
+       * 상품을 선택하여 -> 드래그하였을 때만 드래깅 이벤트 동작
        * */
       if (that._machineState.dataTransfer.amount !== 0) {
         that.dragging(e, e.srcElement);
@@ -158,9 +159,48 @@ var Payment = View.extend({
       this.updateMyAccount(-amount);
       dataTransferData.amount = amount;
       this.log(Utils.comma(amount) + "원을 꺼냈습니다!");
+      this.cloneDragItemEl(target, e.clientX, e.clientY);
     } else {
       this.log("가지고 있는 돈이 부족합니다.");
     }
+  },
+  /**
+   * 드래그 대상을 지정된 위치에 복제
+   * @param {HTMLElement} el 복제할 엘리먼트
+   * @param {Number} x 마우스 X축 좌표
+   * @param {Number} y 마우스 Y축 좌표
+   * @return {Object} Payment
+   * */
+  cloneDragItemEl: function (el, x, y) {
+    var target = el.cloneNode(true);
+    var targetId = "dragItem";
+    target.setAttribute("id", targetId);
+    this.moveDragItemEl(offsetX, offsetY, target);
+    Utils.$("#app").appendChild(target);
+    this._machineState.$dragItemEl = target;
+    return this;
+  },
+  /**
+   * 드래그 아이템을 지정된 위치에로 이동
+   * @param {Number} x 마우스 X축 좌표
+   * @param {Number} y 마우스 Y축 좌표
+   * @param {HTMLElement} [el] 복제할 엘리먼트
+   * @return {Object} Payment
+   * */
+  moveDragItemEl: function (x, y, el) {
+    var target = el || this._machineState.$dragItemEl;
+    target.style.left = 5 + x + "px";
+    target.style.top = 5 + y + "px";
+    return this;
+  },
+  /**
+   * 드래그 아이템을 제거
+   * @return {Object} Payment
+   * */
+  clearDragItemEl: function () {
+    var $dragItemEl = this._machineState.$dragItemEl;
+    $dragItemEl.parentNode.removeChild($dragItemEl);
+    return this;
   },
   /**
    * 드래그 종료 이벤트 핸들러
@@ -181,6 +221,7 @@ var Payment = View.extend({
         this.log("돈을 떨어트렸습니다..");
       }
       dataTransferData.amount = 0;
+      this.clearDragItemEl();
     }
   },
   /**
@@ -191,6 +232,7 @@ var Payment = View.extend({
    * @return {Object} Payments
    * */
   dragging: function (e, target) {
+    this.moveDragItemEl(e.clientX, e.clientY);
   },
   /**
    * 금액 입력
