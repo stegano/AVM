@@ -1,7 +1,9 @@
 var Model = require("../../lib/framework/Model");
 /**
  * 사용자 결제정보를 보여주는 뷰의 모델
- * @namespace PaymentModel
+ * @class
+ * @constructor
+ * @extends Model
  * */
 var PaymentModel = new Model({
   /**

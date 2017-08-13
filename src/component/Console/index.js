@@ -4,7 +4,9 @@ var $ = Utils.$;
 var model = require("./model");
 /**
  * 콘솔을 보여주는 뷰 컴포넌트
- * @namespace Console
+ * @class
+ * @constructor
+ * @extends View
  * */
 var Console = View.extend({
   model: model,
