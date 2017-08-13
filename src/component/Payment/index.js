@@ -166,6 +166,7 @@ var Payment = View.extend({
   },
   /**
    * 드래그 대상을 지정된 위치에 복제
+   * @memberOf Payment
    * @param {HTMLElement} el 복제할 엘리먼트
    * @param {Number} x 마우스 X축 좌표
    * @param {Number} y 마우스 Y축 좌표
@@ -182,6 +183,7 @@ var Payment = View.extend({
   },
   /**
    * 드래그 아이템을 지정된 위치에로 이동
+   * @memberOf Payment
    * @param {Number} x 마우스 X축 좌표
    * @param {Number} y 마우스 Y축 좌표
    * @param {HTMLElement} [el] 복제할 엘리먼트
@@ -195,6 +197,7 @@ var Payment = View.extend({
   },
   /**
    * 드래그 아이템을 제거
+   * @memberOf Payment
    * @return {Object} Payment
    * */
   clearDragItemEl: function () {
