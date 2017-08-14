@@ -9,15 +9,14 @@ var regExp = {
   comma: /\B(?=(\d{3})+(?!\d))/g,
   templateInterpolate: /{{=.+?}}/gm
 };
-
 /**
  * 유틸 함수
- * @namespace Utils
+ * @module Utils
  * */
 var Utils = {
   /**
    * 간단한 템플릿 엔진
-   * @memberOf Utils
+   * @memberOf module:Utils
    * @param {String} htmlString
    * @return {Function} replaceTemplateData
    * */
@@ -42,7 +41,7 @@ var Utils = {
   },
   /**
    * 숫자에 콤마 추가
-   * @memberOf Utils
+   * @memberOf module:Utils
    * @param {Number} number 정수
    * @return {String}
    * */
@@ -51,7 +50,7 @@ var Utils = {
   },
   /**
    * 랜덤 숫자 생성
-   * @memberOf Utils
+   * @memberOf module:Utils
    * @param {Number} min 최소 값
    * @param {Number} max 최대 값
    * @return {Number} `min ~ max` 사이의 정수
@@ -61,7 +60,7 @@ var Utils = {
   },
   /**
    * `Function.prototype.bind` 구현
-   * @memberOf Utils
+   * @memberOf module:Utils
    * @param {Function} func 함수
    * @param {Object} context 함수 실행시점 컨텍스트
    * @param {Array} args 입력 값들
@@ -75,7 +74,7 @@ var Utils = {
   },
   /**
    * `Object`를 확장하는 함수
-   * @memberOf Utils
+   * @memberOf module:Utils
    * @param {Object} targetObject 확장될 대상
    * @param {Object} sourceObject 확장할 소스
    * @return {Object} targetObject 확장된 대상 오브젝트
