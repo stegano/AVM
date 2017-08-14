@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "test": "mocha test",
+    "test": "node ./node_modules/.bin/karma start",
     "lint": "node node_modules/.bin/eslint src/**/**",
     "docs": "node node_modules/.bin/jsdoc src/**/**"
   },

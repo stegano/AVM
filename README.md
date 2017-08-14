@@ -28,7 +28,7 @@ npm run build
 
 ### 의존성 모듈 설치
 
-아래 개발문서 또는 테스트 케이스를 실행하기 위해 필요한 의존성 모듈을 인스톨해 주세요!  
+아래 개발문서 또는 테스트 케이스를 실행하기 위해 필요한 의존성 모듈을 모두 인스톨해 주세요!  
 
 ```bash
 npm i
@@ -44,7 +44,18 @@ npm run docs
 
 ### 유닛 테스트
 
-테스트는 [mocha](https://mochajs.org/)와 [chai](http://chaijs.com/)를 이용하여 [Node](https://nodejs.org)에서 실행되는 유닛 테스트 입니다.
+유닛 테스트는 [SauceLabs](https://saucelabs.com)을 이용하여 원격지에 있는 브라우저에서 테스트를 실행합니다! Karma 태스크 러너에 유닛 테스트에 대한 세팅을 해두었으며 테스트에는 [Mocha](https://mochajs.org/)와 [Chai](http://chaijs.com/) 라이브러리를 이용 하였습니다.
+
+테스트 방법은 아래 내용을 참고해 주세요 :)
+
+1) 터미널을 열고 환경변수에 SauceLabs에서 발급받은 계정과 엑세스 키를 입력합니다.
+
+```bash
+$ export SAUCE_USERNAME=rfc4252
+$ export SAUCE_ACCESS_KEY=e780febe-c1af-4297-9999-04956a545e0f
+```
+
+2) 아래 명령어를 입력하여 Karma를 실행 합니다.
 
 ```bash
 npm test
@@ -57,9 +68,14 @@ npm test
 - `lib/utils/selector.js` -> jQuery-style 돔 셀렉터 유틸 추가
   - 각 컴포넌트에 해당 유틸을 적용
 
-### `v1.0.0 > v2.0.0` 변경된 코드
+### v2.0.1
 
-- https://github.com/rfc4252/AVM/compare/v1.0.0...v2.0.0
+- `Karma` 태스크러너 추가
+- `Selector` 테스트케이스 추가
+
+### `v1.0.0 > v2.0.1` 변경된 코드
+
+- https://github.com/rfc4252/AVM/compare/v1.0.0...v2.0.1
 
 
 ### 감사합니다 :)
