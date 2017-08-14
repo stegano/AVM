@@ -1,4 +1,4 @@
-var Selector = require("./selector");
+var Selector = require("./Selector");
 var selector = new Selector();
 /**
  * 정규식 패턴
